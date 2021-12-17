@@ -1,0 +1,84 @@
+﻿@using MVC5_ASPNET_FINALPROJECT.Models
+@model IEnumerable<AdminOrder>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Sipariş Listesi</h3>
+                </div><!-- /.box-header -->
+
+                <br />
+                <a class="btn btn-primary btn-block" href="@Url.Action("Create")">Yeni Kayıt</a>
+                <br />
+                <div class="row"><div class="col-xs-6"><div id="example1_length" class="dataTables_length"><label><select size="1" name="example1_length" aria-controls="example1"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> records per page</label></div></div><div class="col-xs-6"><div class="dataTables_filter" id="example1_filter"><label>Search: <input type="text" aria-controls="example1"></label></div></div></div>
+
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Sipariş Id</th>
+                                <th>Sipariş Numarası</th>
+                                <th>Sipariş Tarihi</th>
+                                <th>Sipariş Durumu</th>
+                                <th>Toplam Fiyat</th>
+                                <th>Ürün Sayısı</th>
+                                <th></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>
+                                        @item.OrderNumber
+                                    </td>
+                                    <td>
+                                        @item.OrderDate
+                                    </td>
+                                    <td>
+                                       @item.OrderState
+                                    </td>
+                                    <td>
+                                       @item.Total
+                                    </td>
+                                    <td>
+                                        @item.Count
+                                    </td>
+                                    <td><a class="btn btn-primary" href="@Url.Action("Details",new { id=item.Id})"><i class="fa fa-fw fa-edit"></i> Sipariş Detay</a></td>
+                                    
+
+                                </tr>
+
+                            }
+
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Sipariş Id</th>
+                                <th>Sipariş Numarası</th>
+                                <th>Sipariş Tarihi</th>
+                                <th>Sipariş Durumu</th>
+                                <th>Toplam Fiyat</th>
+                                <th>Ürün Sayısı</th>
+                                <th></th>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section>
+

@@ -1,0 +1,94 @@
+﻿@model MVC5_ASPNET_FINALPROJECT.Models.OrderDetails
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="span12">
+
+        <div class="well well-small">
+
+
+            <table class="table table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th>Sipariş ID</th>
+                        <th>Sipariş Numarası</th>
+                        <th>Sipariş Tarihi</th>
+                        <th>Toplam Tutar(₺)</th>
+                        <th>Sipariş Durumu</th>
+
+                        <th>Adres</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                    <tr>
+                        <td>@Model.OrderId</td>
+                        <td>@Model.orderNumber</td>
+                        <td>@Model.OrderDate</td>
+                        <td>@Model.Total</td>
+                        <td>
+                            @if (Model.OrderState == MVC5_ASPNET_FINALPROJECT.Entity.OrderState.Bekleniyor)
+                            {
+                                <a class="btn btn-danger">Sipariş Bekleniyor.</a>
+                            }
+                            else if (Model.OrderState == MVC5_ASPNET_FINALPROJECT.Entity.OrderState.Tamamlandı)
+                            {
+                                <a class="btn btn-success">Sipariş Tamamlandı.</a>
+                            }
+                            else if (Model.OrderState == MVC5_ASPNET_FINALPROJECT.Entity.OrderState.Kargolandı)
+                            {
+                                <a>Sipariş Kargolandı.</a>
+                            }
+                            else if (Model.OrderState == MVC5_ASPNET_FINALPROJECT.Entity.OrderState.Paketlendi)
+                            {
+                                <a class="btn btn-primary">Sipariş Paketlendi.</a>
+                            }
+
+                        </td>
+                        <td>
+                            @Model.Address<br />
+                            @Model.City<br />
+                            @Model.County<br />
+                            @Model.Street<br />
+                            @Model.PostCode<br />
+
+                        </td>
+                        
+                    </tr>
+                   
+                </tbody>
+
+            </table><br />
+            <table class="table table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th>Ürün Görseli</th>
+                        <th>Ürün Adı</th>
+                        <th>Toplam Tutar(₺)</th>
+                        <th>Adet</th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderLineModels)
+                    {
+                        <tr>
+                            <td><img src="~/Content/image/@item.Image" width="75"height="75" /></td>
+                            <td>@item.ProductName</td>
+                            <td>@item.Price</td>
+                            <td>@item.Quantity</td>
+                            <td><a href="/Home/ProductDetails/@item.ProductId" class="btn btn-success" target="_blank">Ürün Detay</a></td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table><br />
+
+        </div>
+    </div>
+</div>
+

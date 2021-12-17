@@ -1,0 +1,108 @@
+﻿@model MVC5_ASPNET_FINALPROJECT.Models.Register
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div id="sidebar" class="span3">
+        <div class="well well-small">
+            <ul class="nav nav-list">
+                @Html.Action("_CategoryList", "Category")
+                <li style="border:0"> &nbsp;</li>
+                @Html.Action("Summary", "Cart")
+            </ul>
+        </div>
+
+
+        @Html.Action("_FeaturedProductList", "Home")
+
+    </div>
+    <div class="span9">
+        <ul class="breadcrumb">
+            <li><a href="/Home/Index">Ana Sayfa</a> <span class="divider">/</span></li>
+            <li class="active">Kayıt Formu</li>
+        </ul>
+       
+        <hr class="soft" />
+        <div class="well">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+
+                <h3>Kişisel Bilgileriniz</h3>
+
+                <div class="control-group">
+                    <label class="control-label" for="inputFname">Adınız: </label>
+                    <div class="controls">
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @style = "max-width:35%" } })
+                            @Html.ValidationMessageFor(model => model.Name,"", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputFname">Soyadınız: </label>
+                    <div class="controls">
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.SurName, new { htmlAttributes = new { @class = "form-control", @style = "max-width:35%" } })
+                            @Html.ValidationMessageFor(model => model.SurName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputFname">Kullanıcı Adınız:</label>
+                    <div class="controls">
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @style = "max-width:35%" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputFname">Emailiniz: </label>
+                    <div class="controls">
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @style = "max-width:35%" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputFname">Şifreniz: </label>
+                    <div class="controls">
+                        <div class="col-md-10">
+                            @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @style = "max-width:35%" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputFname">Yeniden Şifre: </label>
+                    <div class="controls">
+                        <div class="col-md-10">
+                            @Html.PasswordFor(model => model.RePassword, new { htmlAttributes = new { @class = "form-control", @style = "max-width:35%" } })
+                            @Html.ValidationMessageFor(model => model.RePassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="submit" name="submitAccount" value="Kayıt Ol" class="exclusive shopBtn">
+                    </div>
+                </div>
+
+            }
+
+        </div>
+
+        
+
+
+    </div>
+</div>
+

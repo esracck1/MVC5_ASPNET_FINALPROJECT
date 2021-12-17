@@ -1,0 +1,91 @@
+﻿@model MVC5_ASPNET_FINALPROJECT.Models.StateModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        @Html.Action("UserCount","Account")
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3>@Model.ProductCount</h3>
+                    <p>Ürün Sayısı</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-bag"></i>
+                </div>
+                <a href="/Product/Index" class="small-box-footer">Detaylı Bilgi <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-olive">
+                <div class="inner">
+                    <h3>@Model.OrderCount</h3>
+                    <p>Sipariş Sayısı</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="/Order/Index" class="small-box-footer">Detaylı Bilgi <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-fuchsia">
+                <div class="inner">
+                    <h3>@Model.PendingOrderCount</h3>
+                    <p>Bekleyen Sipariş Sayısı</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+                <a href="/Order/PendingOrders" class="small-box-footer">Detaylı Bilgi <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>@Model.CompletedOrderCount</h3>
+                    <p>Tamamlanan Sipariş Sayısı</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="/Order/CompletedOrders" class="small-box-footer">Detaylı Bilgi <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-orange">
+                <div class="inner">
+                    <h3>@Model.PackedOrderCount</h3>
+                    <p>Paketlenen Sipariş Sayısı</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="/Order/PackedOrders" class="small-box-footer">Detaylı Bilgi <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-maroon">
+                <div class="inner">
+                    <h3>@Model.ShipedOrderCount</h3>
+                    <p>Kargolanan Sipariş Sayısı</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="/Order/ShipedOrders" class="small-box-footer">Detaylı Bilgi <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+      
+
+        </div>
+    </section>

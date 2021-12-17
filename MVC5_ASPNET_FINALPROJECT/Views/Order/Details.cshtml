@@ -1,0 +1,157 @@
+﻿@using MVC5_ASPNET_FINALPROJECT.Models
+@model OrderDetails
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content">
+    <div>
+        <h4>Sipariş Bilgileri</h4>
+        <hr />
+        <div class="row">
+            @if (TempData["mesaj"] != null)
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4>	<i class="icon fa fa-check"></i>İşlem Başarılı!</h4>
+                    Bilgileriniz güvenli bir şekilde güncellendi.
+                </div>
+            }
+        </div>
+        <dl class="dl-horizontal">
+            <dt>
+                Sipariş Durumu
+            </dt>
+
+            <dd>
+                @using (Html.BeginForm("UpdateOrderState", "Order", FormMethod.Post))
+                    {
+                @Html.HiddenFor(i => i.OrderId)
+                @Html.EnumDropDownListFor(i => i.OrderState, "Sipariş Durumunu Seç", new { @class = "form-control" })
+                <button type="submit" class="btn btn-primary">Güncelle</button>
+                }
+
+            </dd>
+
+            <dt>
+                Kullanıcı Adı
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(Model => Model.UserName)
+            </dd>
+            <dt>
+                Sipariş Numarası
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(Model => Model.orderNumber)
+            </dd>
+            <dt>
+                Toplam Tutar
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(Model => Model.Total)
+            </dd>
+            <dt>
+                Sipariş Tarihi
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(Model => Model.OrderDate)
+            </dd>
+            <dt>
+                Sipariş Adresi
+            </dt>
+
+            <dd>
+                Adres:   @Html.DisplayFor(Model => Model.Address)<br />
+                İl:      @Html.DisplayFor(Model => Model.City)<br />
+                İlçe:    @Html.DisplayFor(Model => Model.County)<br />
+                Mahalle: @Html.DisplayFor(Model => Model.Street)<br />
+                Posta Kodu: @Html.DisplayFor(Model => Model.PostCode)<br />
+            </dd>
+
+        </dl>
+    </div>
+    <table class="table table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th>Sipariş ID</th>
+                <th>Sipariş Numarası</th>
+                <th>Sipariş Tarihi</th>
+                <th>Toplam Tutar(₺)</th>
+                <th>Sipariş Durumu</th>
+
+                <th>Adres</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>@Model.OrderId</td>
+                <td>@Model.orderNumber</td>
+                <td>@Model.OrderDate</td>
+                <td>@Model.Total</td>
+                <td>
+                    @if (Model.OrderState == MVC5_ASPNET_FINALPROJECT.Entity.OrderState.Bekleniyor)
+                    {
+                        <a class="btn btn-danger">Sipariş Bekleniyor.</a>
+                    }
+                    else if (Model.OrderState == MVC5_ASPNET_FINALPROJECT.Entity.OrderState.Tamamlandı)
+                    {
+                        <a class="btn btn-success">Sipariş Tamamlandı.</a>
+                    }
+                    else if (Model.OrderState == MVC5_ASPNET_FINALPROJECT.Entity.OrderState.Kargolandı)
+                    {
+                        <a>Sipariş Kargolandı.</a>
+                    }
+                    else if (Model.OrderState == MVC5_ASPNET_FINALPROJECT.Entity.OrderState.Paketlendi)
+                    {
+                        <a class="btn btn-primary">Sipariş Paketlendi.</a>
+                    }
+
+                </td>
+                <td>
+                    @Model.Address<br />
+                    @Model.City<br />
+                    @Model.County<br />
+                    @Model.Street<br />
+                    @Model.PostCode<br />
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table><br />
+    <table class="table table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th>Ürün Görseli</th>
+                <th>Ürün Adı</th>
+                <th>Toplam Tutar(₺)</th>
+                <th>Adet</th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderLineModels)
+            {
+                <tr>
+                    <td><img src="~/Content/image/@item.Image" width="75" height="75" /></td>
+                    <td>@item.ProductName</td>
+                    <td>@item.Price</td>
+                    <td>@item.Quantity</td>
+                    <td><a href="/Home/ProductDetails/@item.ProductId" class="btn btn-success" target="_blank">Ürün Detay</a></td>
+                </tr>
+            }
+        </tbody>
+
+    </table><br />
+</section>
+

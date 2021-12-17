@@ -1,0 +1,4 @@
+﻿@model MVC5_ASPNET_FINALPROJECT.Models.Cart
+<a href="/Cart/Index">
+    <span class="icon-shopping-cart"></span>[@Model.Cartlines.Count] Adet
+  <span class="badge badge-warning"> @Model.ProductTotal().ToString("c")</span></a>
